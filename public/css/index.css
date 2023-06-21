@@ -1,14 +1,65 @@
 #map {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 400px;
     border: 1px solid #ccc;
 }
-
 .desk {
     position: absolute;
-    width: 50px;
-    height: 50px;
     background-color: #f1f1f1;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: move;
+}
+.symbol {
+    font-weight: bold;
+}
+.ui-resizable-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
+.ui-resizable-n {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+.ui-resizable-e {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+.ui-resizable-s {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+.ui-resizable-w {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+.ui-resizable-ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+.ui-resizable-se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
+.ui-resizable-sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+.ui-resizable-nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
 }
