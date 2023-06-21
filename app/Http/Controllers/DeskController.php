@@ -42,12 +42,13 @@ class DeskController extends Controller
 
     public function update(Request $request, Desk $desk): JsonResponse
     {
-        if ($request->has('position_x') && $request->has('position_y')) {
-            $desk->update($request->only(['position_x', 'position_y']));
+        $data = $request->only(['position_x', 'position_y', 'height', 'width']);
+
+        if ($desk->update($data)) {
+            return response()->json(['message' => 'Desk updated successfully']);
         } else {
             return response()->json(['message' => 'Failed to update desk']);
         }
-        return response()->json(['message' => 'Desk updated successfully']);
     }
 
     public function patch(Request $request, $id){
