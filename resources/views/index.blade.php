@@ -9,11 +9,13 @@
 
 <div id="map">
     @foreach ($desks as $desk)
-        <div class="desk" data-desk-id="{{ $desk->id }}" style="left: {{ $desk->position_x }}px; top: {{ $desk->position_y }}px;">
+        <div class="desk" data-desk-id="{{ $desk->id }}" style="left: {{ $desk->position_x }}px; top: {{ $desk->position_y }}px; height: {{ $desk->height }}px; width: {{$desk->width}}px;">
             <div class="symbol">{{ $desk->symbol }}</div>
             <div class="name">{{ $desk->name }}</div>
             <input type="hidden" name="position_x" value="{{ $desk->position_x }}">
             <input type="hidden" name="position_y" value="{{ $desk->position_y }}">
+            <input type="hidden" name="height" value="{{ $desk->height }}">
+            <input type="hidden" name="width" value="{{ $desk->width }}">
         </div>
     @endforeach
 </div>
