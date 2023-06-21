@@ -45,7 +45,7 @@ class DeskController extends Controller
         if ($request->has('position_x') && $request->has('position_y')) {
             $desk->update($request->only(['position_x', 'position_y']));
         } else {
-            $desk->update($request->only(['name', 'symbol']));
+            return response()->json(['message' => 'Failed to update desk']);
         }
         return response()->json(['message' => 'Desk updated successfully']);
     }
@@ -60,7 +60,7 @@ class DeskController extends Controller
     }
 
     public function destroy($id){
-        $desk = Desk::find($id);
+        $desk = Desk::findOrFail($id);
         if($desk){
             $desk->delete();
             return "Desk successfully deleted!";
