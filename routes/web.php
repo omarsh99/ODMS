@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DeskController::class, 'index']);
 
 Route::get('/desks/create', [DeskController::class, 'create']);
 Route::post('/desks', [DesKController::class, 'store']);
 Route::get('/desks/{id}/edit', [DeskController::class, 'edit']);
-Route::put('/desks/{id}', [DeskController::class, 'update']);
+Route::put('/desks/{desk}', [DeskController::class, 'update']);
 Route::delete('/desks/{id}', [DeskController::class, 'destroy']);
