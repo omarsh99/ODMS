@@ -20,4 +20,5 @@ Route::get('/desks/create', [DeskController::class, 'create']);
 Route::post('/desks', [DesKController::class, 'store']);
 Route::get('/desks/{id}/edit', [DeskController::class, 'edit']);
 Route::put('/desks/{desk}', [DeskController::class, 'update']);
+Route::patch('/desks/{desk}', [DeskController::class, 'patch'])->name('desks.update');
 Route::delete('/desks/{id}', [DeskController::class, 'destroy']);
