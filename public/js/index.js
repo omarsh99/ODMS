@@ -21,10 +21,10 @@ $(document).ready(function() {
                     position_y: position_y,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(response) {
+                success: function() {
                     console.log('Desk position updated successfully');
                 },
-                error: function(error) {
+                error: function() {
                     console.log('Error updating desk position');
                 }
             });
