@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DeskController::class, 'index']);
-
+Route::get('/desks', [DeskController::class, 'index']);
 Route::get('/desks/create', [DeskController::class, 'create']);
 Route::post('/desks', [DesKController::class, 'store']);
 Route::get('/desks/{id}/edit', [DeskController::class, 'edit']);
