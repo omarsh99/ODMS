@@ -10,6 +10,11 @@ class DeskController extends Controller
 {
     public function index(){
         $desks = Desk::all();
+        $url = request()->path();
+
+        if($url === 'desks') {
+            return view('desks')->with('desks', $desks);
+        }
         return view('index')->with('desks', $desks);
     }
     public function create(){
