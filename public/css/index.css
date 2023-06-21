@@ -1,19 +1,53 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
 #map {
     position: relative;
-    width: 600px;
-    height: 400px;
-    border: 1px solid #ccc;
+    width: 800px;
+    height: 600px;
+    border: 2px solid #ddd;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .desk {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 15px;
     cursor: move;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.symbol {
+
+.desk:hover {
+    background-color: #e8e8e8;
+}
+
+.desk .name {
+    font-size: 16px;
     font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
 }
+
+.desk .symbol {
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+
 .ui-resizable-handle {
     position: absolute;
     width: 10px;
@@ -62,4 +96,83 @@
     top: -5px;
     left: -5px;
     cursor: nw-resize;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 20px 10px 10px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: #2196f3;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(33, 150, 243, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #1565c0;
+}
+
+.button:active {
+    background-color: #0d47a1;
+    box-shadow: 0 1px 2px rgba(33, 150, 243, 0.5);
+}
+
+@media (max-width: 1200px) {
+    #map {
+        width: 600px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 992px) {
+    #map {
+        width: 400px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    #map {
+        width: 300px;
+        height: 225px;
+    }
+
+    .desk {
+        padding: 10px;
+    }
+
+    .desk .name {
+        font-size: 14px;
+    }
+
+    .desk .symbol {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    #map {
+        width: 200px;
+        height: 150px;
+    }
+
+    .desk {
+        padding: 8px;
+    }
+
+    .desk .name {
+        font-size: 12px;
+    }
+
+    .desk .symbol {
+        font-size: 14px;
+    }
 }
