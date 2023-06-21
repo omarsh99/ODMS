@@ -20,3 +20,8 @@
     @endforeach
 </div>
 
+<div>
+    <a class="button" href="/desks/create">Add Desk</a>
+    <a class="button" href="/desks">View All</a>
+</div>
+
