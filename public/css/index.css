@@ -110,7 +110,7 @@ body {
     color: #fff;
     background-color: #2196f3;
     border: none;
-    border-radius: 50px;
+    border-radius: 4px;
     box-shadow: 0 2px 5px rgba(33, 150, 243, 0.5);
     cursor: pointer;
     transition: background-color 0.3s ease;

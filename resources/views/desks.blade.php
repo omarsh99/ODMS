@@ -1,16 +1,16 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/desks.css') }}" />
 
 <h1>All Desks</h1>
-    <table>
-        <thead>
+<table>
+    <thead>
         <tr>
             <th>Name</th>
             <th>Symbol</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         @foreach($desks as $desk)
             <tr>
                 <td>{{ $desk->name }}</td>
@@ -27,5 +27,7 @@
                 </td>
             </tr>
         @endforeach
-        </tbody>
-    </table>
+    </tbody>
+</table>
+
+<a class="back" href="/">Back</a>
