@@ -18,7 +18,7 @@ Route::get('/', [DeskController::class, 'index']);
 Route::get('/desks', [DeskController::class, 'index']);
 Route::get('/desks/create', [DeskController::class, 'create']);
 Route::post('/desks', [DesKController::class, 'store']);
-Route::get('/desks/{id}/edit', [DeskController::class, 'edit']);
+Route::get('/desks/{id}/edit', [DeskController::class, 'edit'])->name('desks.edit');
 Route::put('/desks/{desk}', [DeskController::class, 'update']);
 Route::patch('/desks/{desk}', [DeskController::class, 'patch'])->name('desks.patch');
 Route::delete('/desks/{id}', [DeskController::class, 'destroy'])->name('desks.destroy');
