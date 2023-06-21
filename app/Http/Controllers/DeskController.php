@@ -30,20 +30,41 @@ class DeskController extends Controller
         $desk->position_y = $position_y;
 
         $desk->save();
-        return redirect()->back();
+        return redirect('/');
     }
 
-    public function edit(){
-        //display page for desk edit
+    public function edit($id){
+        $desk = Desk::findOrFail($id);
+
+        return view('desk_edit', compact('desk'));
     }
+
 
     public function update(Request $request, Desk $desk): JsonResponse
     {
-        $desk->update($request->only(['position_x', 'position_y']));
-        return response()->json(['message' => 'Desk position updated successfully']);
+        if ($request->has('position_x') && $request->has('position_y')) {
+            $desk->update($request->only(['position_x', 'position_y']));
+        } else {
+            $desk->update($request->only(['name', 'symbol']));
+        }
+        return response()->json(['message' => 'Desk updated successfully']);
     }
 
-    public function destroy(){
-        //remove desk
+    public function patch(Request $request, $id){
+        $desk = Desk::findOrFail($id);
+
+        $desk->name = $request->name;
+        $desk->symbol = $request->symbol;
+        $desk->save();
+        return "Desk successfully updated!";
+    }
+
+    public function destroy($id){
+        $desk = Desk::find($id);
+        if($desk){
+            $desk->delete();
+            return "Desk successfully deleted!";
+        }
+        return "Desk not found!";
     }
 }
