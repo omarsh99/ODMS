@@ -28,6 +28,38 @@ $(document).ready(function() {
                     console.log('Error updating desk position');
                 }
             });
+
+        }
+    }).resizable({
+        containment: '#map',
+        handles: 'n, e, s, w, ne, se, sw, nw',
+        resize: function(event, ui) {
+            var desk = $(this);
+            var position = ui.position;
+            var width = ui.size.width;
+            var height = ui.size.height;
+            desk.find('input[name="position_x"]').val(position.left);
+            desk.find('input[name="position_y"]').val(position.top);
+            desk.css({ width: width, height: height });
+
+            var deskId = desk.data('desk-id');
+
+            // Send AJAX request to update the desk's position in the database
+            $.ajax({
+                url: '/desks/' + deskId,
+                method: 'PUT',
+                data: {
+                    height: height,
+                    width: width,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function() {
+                    console.log('Desk dimensions updated successfully');
+                },
+                error: function() {
+                    console.log('Error updating desk dimensions');
+                }
+            });
         }
     });
 });
