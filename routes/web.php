@@ -36,7 +36,7 @@ Route::get('profile', [AuthController::class, 'profile'])->middleware('isLoggedI
 
 
 //Category Routes
-Route::get('categories', [CategoryController::class, 'index']);
-Route::get('categories/create', [CategoryController::class, 'create']);
-Route::post('categories', [CategoryController::class, 'store']);
+Route::get('categories', [CategoryController::class, 'index'])->middleware('isLoggedIn');;
+Route::get('categories/create', [CategoryController::class, 'create'])->middleware('isLoggedIn');;
+Route::post('categories', [CategoryController::class, 'store'])->middleware('isLoggedIn');;
 Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
