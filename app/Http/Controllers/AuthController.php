@@ -11,55 +11,46 @@ class AuthController extends Controller
     public function login(){
         return view("auth.login");
     }
-    public function loginUser(Request $request){
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required'
+    public function loginUser(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
-        $user = User::where('email', '=', $request->email)->first();
-        if($user){
-            if(Hash::check($request->password, $user->password)){
-                $request->session()->put('loginId', $user->id);
-                return redirect('/');
-            }else{
-                return back()->with('fail', 'Wrong password!');
-            }
-        }else{
-            return back()->with('fail', 'Wrong email!');
-        }
-    }
+        $user = User::where('email', $credentials['email'])->first();
 
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            $request->session()->put('loginId', $user->id);
+            return redirect('/');
+        }
+        return back()->with('fail', 'Invalid email or password.');
+    }
 
     public function register(){
         return view("auth.register");
     }
-    public function registerUser(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:5'
+
+    public function registerUser(Request $request)
+    {
+        $credentials = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:5'
         ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-
-        $res = $user->save();
-        if($res){
+        $user = User::create([
+            'name' => $credentials['name'],
+            'email' => $credentials['email'],
+            'password' => Hash::make($credentials['password'])
+        ]);
+        if ($user) {
             return back()->with('success', 'You have registered successfully!');
-        }else{
-            return back()->with('fail', 'Something went wrong!');
         }
+        return back()->with('fail', 'Something went wrong!');
     }
 
-    public function profile(){
-
-    }
-
-    public function logout(){
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect("/");
-        }
+    public function logout()
+    {
+        Session::forget('loginId');
+        return redirect('/');
     }
 }
