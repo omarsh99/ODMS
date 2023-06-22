@@ -7,6 +7,12 @@
     <title>Office Desk Mapping System</title>
 </head>
 
+@if (Session::has('loginId'))
+    <div class="user">
+        <h1>Welcome to your profile {{$data->name}}!</h1>
+    </div>
+@endif
+
 <div id="map">
     @foreach ($desks as $desk)
         <div class="desk" data-desk-id="{{ $desk->id }}" style="left: {{ $desk->position_x }}px; top: {{ $desk->position_y }}px; height: {{ $desk->height }}px; width: {{$desk->width}}px;">
@@ -23,5 +29,10 @@
 <div>
     <a class="button" href="/desks/create">Add Desk</a>
     <a class="button" href="/desks">View All</a>
+    @if (!Session::has('loginId'))
+        <a class="button" href="/login">Login</a>
+    @else
+        <a class="button" href="/logout">Logout</a>
+    @endif
 </div>
 
