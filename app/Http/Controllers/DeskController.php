@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desk;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DeskController extends Controller
 {
     public function index(){
+        $data = array();
+        if(Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+
         $desks = Desk::all();
         $url = request()->path();
 
         $view = ($url === 'desks') ? 'desks' : 'index';
-        return view($view, compact('desks'));
+        return view($view, compact('desks', 'data'));
     }
     public function create(){
         return view('desk_create');
