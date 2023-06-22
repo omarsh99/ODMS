@@ -12,29 +12,28 @@ class DeskController extends Controller
         $desks = Desk::all();
         $url = request()->path();
 
-        if($url === 'desks') {
-            return view('desks')->with('desks', $desks);
-        }
-        return view('index')->with('desks', $desks);
+        $view = ($url === 'desks') ? 'desks' : 'index';
+        return view($view, compact('desks'));
     }
     public function create(){
-        //display page for desk creation
         return view('desk_create');
     }
 
     public function store(Request $request){
-        $name = $request->name;
-        $symbol = $request->symbol;
-        $position_x = $request->position_x;
-        $position_y = $request->position_y;
+
+        $request->validate([
+            'name' => 'required',
+            'symbol' => 'required',
+            'position_x' => 'numeric',
+            'position_y' => 'numeric',
+        ]);
+
+        $validatedData = $request->only(['name', 'symbol', 'position_x', 'position_y']);
 
         $desk = new Desk();
-        $desk->name = $name;
-        $desk->symbol = $symbol;
-        $desk->position_x = $position_x;
-        $desk->position_y = $position_y;
-
+        $desk->fill($validatedData);
         $desk->save();
+
         return redirect('/');
     }
 
@@ -47,29 +46,38 @@ class DeskController extends Controller
 
     public function update(Request $request, Desk $desk): JsonResponse
     {
+
         $data = $request->only(['position_x', 'position_y', 'height', 'width']);
 
         if ($desk->update($data)) {
-            return response()->json(['message' => 'Desk updated successfully']);
+            $message = 'Desk updated successfully';
         } else {
-            return response()->json(['message' => 'Failed to update desk']);
+            $message = 'Failed to update desk';
         }
+        return response()->json(['message' => $message]);
     }
 
-    public function patch(Request $request, $id){
+
+    public function patch(Request $request, $id)
+    {
         $desk = Desk::findOrFail($id);
 
-        $desk->name = $request->name;
-        $desk->symbol = $request->symbol;
-        $desk->save();
-        return "Desk successfully updated!";
+        $request->validate([
+            'name' => 'required',
+            'symbol' => 'required'
+        ]);
+
+        $desk->update($request->only(['name', 'symbol']));
+
+        return redirect('/');
     }
+
 
     public function destroy($id){
-        $desk = Desk::findOrFail($id);
+        $desk = Desk::find($id);
         if($desk){
             $desk->delete();
-            return "Desk successfully deleted!";
+            return redirect('/');
         }
         return "Desk not found!";
     }
