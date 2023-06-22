@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Desk;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -23,7 +24,8 @@ class DeskController extends Controller
         return view($view, compact('desks', 'data'));
     }
     public function create(){
-        return view('desk_create');
+        $categories = Category::all();
+        return view('desk_create', compact('categories'));
     }
 
     public function store(Request $request){
@@ -35,7 +37,7 @@ class DeskController extends Controller
             'position_y' => 'numeric',
         ]);
 
-        $validatedData = $request->only(['name', 'symbol', 'position_x', 'position_y']);
+        $validatedData = $request->only(['name', 'symbol', 'position_x', 'position_y', 'category_id']);
 
         $desk = new Desk();
         $desk->fill($validatedData);

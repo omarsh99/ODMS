@@ -27,11 +27,12 @@
 </div>
 
 <div>
-    <a class="button" href="/desks/create">Add Desk</a>
-    <a class="button" href="/desks">View All</a>
     @if (!Session::has('loginId'))
         <a class="button" href="/login">Login</a>
     @else
+        <a class="button" href="/categories/">Categories</a>
+        <a class="button" href="/desks/create">Add Desk</a>
+        <a class="button" href="/desks">View All</a>
         <a class="button" href="/logout">Logout</a>
     @endif
 </div>

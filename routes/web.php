@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeskController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,10 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('isLoggedIn'
 Route::get('register', [AuthController::class, 'register'])->middleware('alreadyLoggedIn');
 Route::post('register', [AuthController::class, 'registerUser'])->name('register-user');
 Route::get('profile', [AuthController::class, 'profile'])->middleware('isLoggedIn');
+
+
+//Category Routes
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('categories/create', [CategoryController::class, 'create']);
+Route::post('categories', [CategoryController::class, 'store']);
+Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
