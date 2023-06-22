@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Desk extends Model
 {
-    protected $fillable = ['name', 'symbol', 'position_x', 'position_y', 'height', 'width'];
     use HasFactory;
+    protected $fillable = ['name', 'symbol', 'position_x', 'position_y', 'height', 'width', 'category_id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
