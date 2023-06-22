@@ -41,6 +41,7 @@ I also added 3 test classes to test all the controllers, all 15 tests pass the a
 - Linux
 - PHPStorm
 - pgAdmin 4
+- Git
 
 ## Goals
 Learn websockets =)
