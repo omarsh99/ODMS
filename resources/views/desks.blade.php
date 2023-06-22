@@ -6,6 +6,7 @@
         <tr>
             <th>Name</th>
             <th>Symbol</th>
+            <th>Category</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -15,6 +16,7 @@
             <tr>
                 <td>{{ $desk->name }}</td>
                 <td>{{ $desk->symbol }}</td>
+                <td>{{ $desk->category->name ?? 'N/A'}}</td>
                 <td>
                     <a href="{{ route('desks.edit', $desk->id) }}">Edit</a>
                 </td>
