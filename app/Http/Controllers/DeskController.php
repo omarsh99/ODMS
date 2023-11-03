@@ -13,17 +13,14 @@ use Illuminate\View\View;
 class DeskController extends Controller
 {
     public function index(){
-        $data = array();
-        if(Session::has('loginId')){
-            $data = User::where('id', '=', Session::get('loginId'))->first();
-        }
+        $data = Session::has('loginId') ? User::find(Session::get('loginId')) : [];
 
         $desks = Desk::all();
-        $url = request()->path();
+        $view = request()->is('desks') ? 'desks' : 'index';
 
-        $view = ($url === 'desks') ? 'desks' : 'index';
         return view($view, compact('desks', 'data'));
     }
+
     public function create(){
         $categories = Category::all();
         return view('desk_create', compact('categories'));
